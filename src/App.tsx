@@ -1,27 +1,51 @@
 import './App.scss'
-import Card from './components/UI/Card'
-import ExpenseItem from './components/Expenses/ExpenseItem'
+import keyConceptsImage from './assets/images/key-concepts.png'
+import componentsImage from './assets/images/components.png'
+import stateImage from './assets/images/state.png'
+import eventsImage from './assets/images/events.png'
 
-const data = [
-  { id: 0, date: new Date(1993, 9, 3), title: 'Aaron', amount: 100 },
-  { id: 1, date: new Date(1994, 10, 4), title: 'Belle', amount: 100 },
-  { id: 2, date: new Date(1995, 11, 5), title: 'Carlin', amount: 100 },
-  { id: 3, date: new Date(1996, 12, 6), title: 'David', amount: 100 },
-  { id: 4, date: new Date(1997, 1, 7), title: 'Elise', amount: 100 },
+const concepts = [
+  {
+    id: 0,
+    title: 'Components',
+    image: componentsImage,
+    description:
+      'Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. Components can receive data via props, and they can render dynamic output using JSX.',
+  },
+  {
+    id: 1,
+    title: 'State',
+    image: stateImage,
+    description:
+      'State is data that may change over time. As it changes, the UI should be updated to reflect the updated data. Each component can maintain its own state and multiple components can share state.',
+  },
+  {
+    id: 2,
+    title: 'Events',
+    image: eventsImage,
+    description:
+      'Event handlers are added via props to (built-in) components. You pass functions as values to such event handlers to control which functions gets executed for which event.',
+  },
 ]
 
 function App() {
   return (
-    <Card className="expenses">
-      {data.map((x) => (
-        <ExpenseItem
-          key={x.id}
-          date={x.date}
-          title={x.title}
-          amount={x.amount}
-        />
-      ))}
-    </Card>
+    <div>
+      <header>
+        <img src={keyConceptsImage} alt="Medal badge with a star" />
+        <h1>Key React Concepts</h1>
+        <p>Selected key React concepts you should know about</p>
+      </header>
+      <ul id="concepts">
+        {concepts.map((concept) => (
+          <li key={concept.id} className="concept">
+            <img src={concept.image} alt={concept.title} />
+            <h2>{concept.title}</h2>
+            <p>{concept.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
