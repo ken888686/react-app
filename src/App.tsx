@@ -1,4 +1,5 @@
 import './App.scss'
+import Card from './components/Card'
 import ExpenseItem from './components/ExpenseItem'
 
 const data = [
@@ -31,11 +32,11 @@ const data = [
 
 function App() {
   return (
-    <>
+    <Card className="expenses">
       {data.map((x) => (
         <ExpenseItem date={x.date} title={x.title} amount={x.amount} />
       ))}
-    </>
+    </Card>
   )
 }
 
