@@ -3,6 +3,7 @@ import componentsImage from './assets/images/components.png'
 import stateImage from './assets/images/state.png'
 import eventsImage from './assets/images/events.png'
 import Header from './components/Header/Header'
+import Concept from './components/Concept/Concept'
 
 const concepts = [
   {
@@ -33,12 +34,13 @@ function App() {
     <div>
       <Header />
       <ul id="concepts">
-        {concepts.map((concept) => (
-          <li key={concept.id} className="concept">
-            <img src={concept.image} alt={concept.title} />
-            <h2>{concept.title}</h2>
-            <p>{concept.description}</p>
-          </li>
+        {concepts.map((x) => (
+          <Concept
+            key={x.id}
+            title={x.title}
+            image={x.image}
+            description={x.description}
+          />
         ))}
       </ul>
     </div>
