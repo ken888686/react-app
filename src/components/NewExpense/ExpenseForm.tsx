@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import './ExpenseForm.scss'
+import { ExpenseData } from '../Models/ExpenseData'
 
-export default function ExpenseForm() {
+type ExpenseFormProps = {
+  onSaveExpenseData: (expenseData: ExpenseData) => void
+}
+
+export default function ExpenseForm(props: ExpenseFormProps) {
   /*
   const [userInput, setUserInput] = useState({
     enteredTitle: '',
@@ -53,6 +58,10 @@ export default function ExpenseForm() {
       amount: amount,
       date: date,
     }
+
+    const { onSaveExpenseData } = props
+    onSaveExpenseData(expenseData)
+
     setTitle('')
     setAmount(0)
     setDate(new Date())
@@ -88,6 +97,7 @@ export default function ExpenseForm() {
             type="date"
             min="2020-01-01"
             max="2025-01-01"
+            pattern="yyyy-MM-dd"
             value={date.toLocaleDateString('zh-TW')}
             onChange={(event) => inputChangeHandler('date', event)}
           />

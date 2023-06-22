@@ -1,13 +1,9 @@
+import { ExpenseData } from '../Models/ExpenseData'
 import Card from '../UI/Card'
 import ExpenseItem from './ExpenseItem'
 
 type ExpensesProps = {
-  data: {
-    id: number
-    date: Date
-    title: string
-    amount: number
-  }[]
+  data: ExpenseData[]
 }
 
 function Expenses(props: ExpensesProps) {
