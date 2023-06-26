@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { InvestmentCalculateInput } from '../../models/InvestmentCalculateInput'
+import classes from './UserInput.module.scss'
 
 type UserInputProps = {
   onCalculate: (userInput: InvestmentCalculateInput) => void
@@ -27,14 +28,14 @@ function UserInput(props: UserInputProps) {
     setUserInput((prevInput) => {
       return {
         ...prevInput,
-        [input]: value,
+        [input]: +value,
       }
     })
   }
 
   return (
-    <form className="form" onSubmit={submitHandler}>
-      <div className="input-group">
+    <form className={classes.form} onSubmit={submitHandler}>
+      <div className={classes['input-group']}>
         <p>
           <label htmlFor="current-savings">Current Savings ($)</label>
           <input
@@ -58,7 +59,7 @@ function UserInput(props: UserInputProps) {
           />
         </p>
       </div>
-      <div className="input-group">
+      <div className={classes['input-group']}>
         <p>
           <label htmlFor="expected-return">
             Expected Interest (%, per year)
@@ -84,11 +85,15 @@ function UserInput(props: UserInputProps) {
           />
         </p>
       </div>
-      <p className="actions">
-        <button onClick={resetHandler} type="reset" className="buttonAlt">
+      <p className={classes.actions}>
+        <button
+          onClick={resetHandler}
+          type="reset"
+          className={classes.buttonAlt}
+        >
           Reset
         </button>
-        <button type="submit" className="button">
+        <button type="submit" className={classes.button}>
           Calculate
         </button>
       </p>

@@ -1,3 +1,5 @@
+import classes from './ResultsTable.module.scss'
+
 type ResultsTableProps = {
   initialInvestment: number
   yearData: {
@@ -17,7 +19,7 @@ const formatter = new Intl.NumberFormat('ja-JP', {
 
 function ResultsTable({ initialInvestment, yearData }: ResultsTableProps) {
   return (
-    <table className="result">
+    <table className={classes.result}>
       <thead>
         <tr>
           <th>Year</th>
