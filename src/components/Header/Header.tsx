@@ -1,11 +1,10 @@
-import keyConceptsImage from '../../assets/images/key-concepts.png'
+import logo from '../../assets/investment-calculator-logo.png'
 
 function Header() {
   return (
-    <header>
-      <img src={keyConceptsImage} alt="Medal badge with a star" />
-      <h1>Key React Concepts</h1>
-      <p>Selected key React concepts you should know about</p>
+    <header className="header">
+      <img src={logo} alt="logo" />
+      <h1>Investment Calculator</h1>
     </header>
   )
 }

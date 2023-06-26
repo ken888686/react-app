@@ -1,27 +1,47 @@
-import './App.scss'
-import Expenses from './components/Expenses/Expenses'
-import { ExpenseData } from './components/Models/ExpenseData'
-import NewExpense from './components/NewExpense/NewExpense'
-
-const data: ExpenseData[] = [
-  { id: 0, date: new Date(1993, 9, 3), title: 'Aaron', amount: 100 },
-  { id: 1, date: new Date(1994, 10, 4), title: 'Belle', amount: 100 },
-  { id: 2, date: new Date(1995, 11, 5), title: 'Carlin', amount: 100 },
-  { id: 3, date: new Date(1996, 12, 6), title: 'David', amount: 100 },
-  { id: 4, date: new Date(1997, 1, 7), title: 'Elise', amount: 100 },
-]
+import { useState } from 'react'
+import Header from './components/Header/Header'
+import ResultsTable from './components/ResultsTable/ResultsTable'
+import UserInput from './components/UserInput/UserInput'
+import { InvestmentCalculateInput } from './models/InvestmentCalculateInput'
 
 function App() {
-  const addExpenseHandler = (expense: ExpenseData) => {
-    data.push({ id: data.length + 1, ...expense })
-    console.log(data)
+  const [userInput, setUserInput] = useState<InvestmentCalculateInput>()
+
+  const calculateHandler = (userInput: InvestmentCalculateInput) => {
+    setUserInput(userInput)
+  }
+
+  const yearlyData = []
+  if (userInput) {
+    let currentSavings = userInput['current-savings']
+    const yearlyContribution = userInput['yearly-contribution']
+    const expectedReturn = userInput['expected-return'] / 100
+    const duration = userInput['duration']
+
+    for (let i = 0; i < duration; i++) {
+      const yearlyInterest = currentSavings * expectedReturn
+      currentSavings += yearlyInterest + yearlyContribution
+      yearlyData.push({
+        year: i + 1,
+        yearlyInterest: yearlyInterest,
+        savingsEndOfYear: currentSavings,
+        yearlyContribution: yearlyContribution,
+      })
+    }
   }
 
   return (
-    <>
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses data={data} />
-    </>
+    <div>
+      <Header />
+      <UserInput onCalculate={calculateHandler} />
+      {!userInput && <p>No investment calculate yet.</p>}
+      {userInput && (
+        <ResultsTable
+          yearData={yearlyData}
+          initialInvestment={userInput['current-savings']}
+        />
+      )}
+    </div>
   )
 }
 
